@@ -21,7 +21,7 @@ public class City
 // класс, который извлекает все города из json-файла
 public class Cities
 {
-    public List<City> cities;  // поле типа список городов
+    public List<City> cities { get; set; } // поле типа список городов
 
     public Cities()   // конструктор к переменной cities
     {
@@ -31,11 +31,9 @@ public class Cities
 
     // метод поиска города и его ID по вводимому из консоли
     public List<City> FindCityFromConsole(string FindX)
-    {
-        List<City> results = new List<City>();
+    {       
         if (FindX.Length>1)
-            results = cities.Where(s => s.name.Contains(FindX) == true).ToList();
-            
-            return results;
+            return cities.Where(s => s.name.Contains(FindX) == true).ToList();
+        return null;
     }
 }
