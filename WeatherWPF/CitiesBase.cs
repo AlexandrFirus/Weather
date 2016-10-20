@@ -31,8 +31,10 @@ public class Cities
 
     // метод поиска города и его ID по вводимому из консоли
     public List<City> FindCityFromConsole(string FindX)
-    {            
-            var results = cities.Where(s => (s.name.Contains(FindX) == true) && (FindX.Length > 1)).ToList();
+    {
+        List<City> results = new List<City>();
+        if (FindX.Length>1)
+            results = cities.Where(s => s.name.Contains(FindX) == true).ToList();
             
             return results;
     }
