@@ -33,7 +33,7 @@ public class Cities
     public List<City> FindCityFromConsole(string FindX)
     {       
         if (FindX.Length>1)
-            return cities.Where(s => s.name.Contains(FindX) == true).ToList();
+            return cities.Where(s => s.name.Contains(FindX)).ToList();
         return null;
     }
 }
