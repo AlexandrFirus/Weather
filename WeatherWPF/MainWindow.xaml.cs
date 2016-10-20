@@ -81,21 +81,13 @@ namespace WpfApplication
         private void FindField_TextChanged(object sender, TextChangedEventArgs e)
         {
             comboBox.Items.Clear();
-            var matches = GetAllCities.FindCityFromConsole(FindField.Text);// получить список городов со вей их инфой 
-               
-            if (matches.Count == 0)
-              {                
-                DataCity.Text = "Incorrect city's name. Try again.";
-                comboBox.Visibility = Visibility.Collapsed;
-                label.Visibility = Visibility.Collapsed;
-                DataCity.Visibility = Visibility.Visible;
-                imgTxbl.Visibility = Visibility.Collapsed;
-            }
-            else
+            List<City> matches = new List<City>();
+            matches = GetAllCities.FindCityFromConsole(FindField.Text);// получить список городов со вей их инфой 
+            if (matches != null)
             {
-                if (matches.Count == 1)
+                if (matches.Count == 0)
                 {
-                    OutputByAsync(matches[0]._id);
+                    DataCity.Text = "Incorrect city's name. Try again.";
                     comboBox.Visibility = Visibility.Collapsed;
                     label.Visibility = Visibility.Collapsed;
                     DataCity.Visibility = Visibility.Visible;
@@ -103,21 +95,33 @@ namespace WpfApplication
                 }
                 else
                 {
-                    if (matches.Count > 1)
+                    if (matches.Count == 1)
                     {
-                        foreach (City val in matches)
-                        {
-                            comboBox.Items.Add(new TextBlock { Text = $"{val.name}  {val.country}\t[{val.coord.lat};{val.coord.lat}]", Tag = val._id });
-                            if (comboBox.Items.Count > 20)
-                                break;
-                        }
-                        comboBox.Visibility = Visibility.Visible;
-                        label.Visibility = Visibility.Visible;
-                        DataCity.Visibility = Visibility.Collapsed;
+                        OutputByAsync(matches[0]._id);
+                        comboBox.Visibility = Visibility.Collapsed;
+                        label.Visibility = Visibility.Collapsed;
+                        DataCity.Visibility = Visibility.Visible;
                         imgTxbl.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        if (matches.Count > 1)
+                        {
+                            foreach (City val in matches)
+                            {
+                                comboBox.Items.Add(new TextBlock { Text = $"{val.name}  {val.country}\t[{val.coord.lat};{val.coord.lat}]", Tag = val._id });
+                                if (comboBox.Items.Count > 20)
+                                    break;
+                            }
+                            comboBox.Visibility = Visibility.Visible;
+                            label.Visibility = Visibility.Visible;
+                            DataCity.Visibility = Visibility.Collapsed;
+                            imgTxbl.Visibility = Visibility.Collapsed;
+                        }
                     }
                 }
             }
+            //else
         }
     }
 }
