@@ -19,6 +19,8 @@ using System.IO;
 
 using System.Net.Http;
 
+using Microsoft.Maps.MapControl.WPF;
+
 
 namespace WpfApplication
 {
@@ -34,9 +36,16 @@ namespace WpfApplication
             button.Visibility = Visibility.Collapsed;
             imgTxbl.Visibility = Visibility.Collapsed;
 
+            Pushpin pin = new Pushpin();
+
+            //MapLocalization.Focus();
+            //MapLocalization.Mode = new AerialMode();
+            //MapLocalization.Mode = new RoadMode();
+            //MapLocalization.Center = new Location(30,0);
+            //MapLocalization.Center= new Location(m.coord.lat, m.coord.lon);
         }
         Cities GetAllCities;
-        
+                
 
         async void OutputByAsync(int CityID)   
         {
@@ -53,6 +62,13 @@ namespace WpfApplication
             imgTxbl.Source = img1;
             imgTxbl.Visibility = Visibility.Visible;
 
+            // блок кода для карты
+            Pushpin pin = new Pushpin();
+            pin.Location = new Location(m.coord.lat, m.coord.lon);
+            MapLocalization.Children.Add(pin);
+            MapLocalization.Center = new Location(m.coord.lat,m.coord.lon);
+            MapLocalization.ZoomLevel =6;
+
             DataCity.Text = $"City:{m.name}\nState:{m.sys.country}\nTemprature:{m.main.temp}C°\nWindSpeed:{m.wind.speed}\nHumidity:{m.main.humidity}";
         }
         
@@ -62,7 +78,7 @@ namespace WpfApplication
 
         }
         
-        //вывод погоды из комбобокса
+        // комбобокс
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedItem = comboBox.SelectedItem as TextBlock;
@@ -80,6 +96,8 @@ namespace WpfApplication
 
         private void FindField_TextChanged(object sender, TextChangedEventArgs e)
         {
+            MapLocalization.ZoomLevel = 3;
+            //MapLocalization.Children.Remove(pin);
             comboBox.Items.Clear();            
             var matches = GetAllCities.FindCityFromConsole(FindField.Text);// получить список городов со вей их инфой 
             if (matches != null)
@@ -96,7 +114,7 @@ namespace WpfApplication
                 {
                     if (matches.Count == 1)
                     {
-                        OutputByAsync(matches[0]._id);
+                        OutputByAsync(matches[0]._id);                        
                         comboBox.Visibility = Visibility.Collapsed;
                         label.Visibility = Visibility.Collapsed;
                         DataCity.Visibility = Visibility.Visible;

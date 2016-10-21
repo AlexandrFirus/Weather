@@ -4,18 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
-        Title="Weather City" Height="650" Width="424" Background="#FFB2F1F1" FontFamily="Beb">
+        Title="Weather City" Height="706" Width="424" Background="#FFB2F1F1" FontFamily="Beb">
     <Grid Margin="0,0,0,0" >
         <Label x:Name="label1" Content="Weather in your city"  HorizontalAlignment="Left" Height="65" Margin="60,20,0,0" VerticalAlignment="Top" Width="400" FontSize="32"  />
 
         <Button x:Name="button" Content="Search" HorizontalAlignment="Left" Height="40" Margin="290,90,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
         <TextBlock x:Name="DataCity" HorizontalAlignment="Left" Margin="50,200,0,0" Padding="10,40,10,10"
-                   TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Width="315" Height="230" Foreground="Black" Background="White" />
+                   TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Width="315" Height="165" Foreground="Black" Background="White" />
         <TextBox   x:Name="FindField" HorizontalAlignment="Left" Margin="50,90,0,0" Padding="10" VerticalAlignment="Top" Width="215" Height="40" TextChanged="FindField_TextChanged"/>
         <ComboBox x:Name="comboBox" Padding="35,5,5,5" HorizontalAlignment="Left" Margin="50,200,0,0" VerticalAlignment="Top" Width="305" Height="30" FontSize="15" SelectionChanged="comboBox_SelectionChanged"/>
         <Label x:Name="label" Content="Choise your city from list:" HorizontalAlignment="Left" Height="50" Margin="95,150,0,0" VerticalAlignment="Top" Width="235" FontSize="20"/>
         <Image x:Name="imgTxbl" HorizontalAlignment="Left" Height="85" VerticalAlignment="Top" Width="100" RenderTransformOrigin="3.4,5.333" Margin="140,130,0,0"/>
+        <m:Map Name="MapLocalization" CredentialsProvider="As0fj_p5h4mBcFzt71Jd7sJl0X3SsQZ2OKkbBqVoYh0DOn0GPEq9qrs5YYRAkaTT" 
+                Mode="AerialWithLabels" Margin="0,390,0,50" ZoomLevel="3"/>
     </Grid>
 
 </Window>
