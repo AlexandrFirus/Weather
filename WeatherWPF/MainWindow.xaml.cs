@@ -80,9 +80,8 @@ namespace WpfApplication
 
         private void FindField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            comboBox.Items.Clear();
-            List<City> matches = new List<City>();
-            matches = GetAllCities.FindCityFromConsole(FindField.Text);// получить список городов со вей их инфой 
+            comboBox.Items.Clear();            
+            var matches = GetAllCities.FindCityFromConsole(FindField.Text);// получить список городов со вей их инфой 
             if (matches != null)
             {
                 if (matches.Count == 0)
@@ -105,8 +104,6 @@ namespace WpfApplication
                     }
                     else
                     {
-                        if (matches.Count > 1)
-                        {
                             foreach (City val in matches)
                             {
                                 comboBox.Items.Add(new TextBlock { Text = $"{val.name}  {val.country}\t[{val.coord.lat};{val.coord.lat}]", Tag = val._id });
@@ -117,11 +114,10 @@ namespace WpfApplication
                             label.Visibility = Visibility.Visible;
                             DataCity.Visibility = Visibility.Collapsed;
                             imgTxbl.Visibility = Visibility.Collapsed;
-                        }
+                        
                     }
                 }
             }
-            //else
         }
     }
 }
