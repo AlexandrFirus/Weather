@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net;
 using System.IO;
+using System.Globalization;
 
 // макет для хоанения информации с внетренней базы городов (формат JSON)
 public class City
@@ -31,9 +32,12 @@ public class Cities
 
     // метод поиска города и его ID по вводимому из консоли
     public List<City> FindCityFromConsole(string FindX)
-    {       
+    {         
+        TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+        string FindY = myTI.ToTitleCase(FindX).ToString();
+        
         if (FindX.Length>1)
-            return cities.Where(s => s.name.Contains(FindX)).ToList();
+            return cities.Where(s => (s.name.Contains(FindX)) || (s.name.Contains(FindY))).ToList();
         return null;
     }
 }
