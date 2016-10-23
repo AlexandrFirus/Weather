@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 using System.Net;
@@ -26,17 +24,17 @@ public class Cities
 
     public Cities()   // конструктор к переменной cities
     {
-        String AllCitiesData = File.ReadAllText("city.list.json"); 
-        cities = JsonConvert.DeserializeObject<List<City>>(AllCitiesData); 
+        String AllCitiesData = File.ReadAllText("city.list.json");
+        cities = JsonConvert.DeserializeObject<List<City>>(AllCitiesData);
     }
 
     // метод поиска города и его ID по вводимому из консоли
     public List<City> FindCityFromConsole(string FindX)
-    {         
+    {
         TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
         string FindY = myTI.ToTitleCase(FindX).ToString();
-        
-        if (FindX.Length>1)
+
+        if (FindX.Length > 1)
             return cities.Where(s => (s.name.Contains(FindX)) || (s.name.Contains(FindY))).ToList();
         return null;
     }

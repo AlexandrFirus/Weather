@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CitiesBase.cs" />
+    <Compile Include="History.cs" />
     <Compile Include="WeatherBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
